@@ -22,6 +22,9 @@ router.get('/:id',getAdmission , (req,res) =>{
 router.get('/name/:id',async (req,res) =>{
   try {
     const admission = await Admission.find({middle_name:req.params.id})
+    if (admission==null){
+      return res.status(404)
+    }
     res.json(admission)
   } catch (e) {
     res.status(500).json({message:e.message})
